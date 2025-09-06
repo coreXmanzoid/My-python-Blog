@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}CoreXManzoid{% endblock %}
+{% block mainheading%}Hi <span>{{ name }}</span>,{% endblock %}
+{% block styles %}
+{{ super() }}
+<style>
+    .myform  textarea{
+        height: 180px;
+        background-color:  #F97A00;
+    }
+</style>
+{% endblock %}
+{% block maintext %}
+{% if account_status == 'Pending' %}
+<h1 class="myh1 ps-5 pb-5">Verification Pending</h1>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>When your account is ready to use
+    <span>We'll inform you through an email.</span>.</p>
+{% elif account_status == 'NotVerified' %}
+<h1 class="myh1 ps-5 pb-5">You Can't Use This Account Anymore.</h1>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Your account is permanently blocked due to some inactual activities.</p>
+{% elif account_status == 'Active' %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>We are glad to see you back.</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any questions about our
+    Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to give us suggestions
+    about our next blog? <span>Just put your question down.</span></p>
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if account_status == 'Active' %}
+<div class="form-control" style="background-color: #FFF4A4;">
+    <div class="myform">
+        <h3 class="myh3 text-center">Send Message</h3>
+        {{ render_form(form) }}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

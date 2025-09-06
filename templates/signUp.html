@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Sign-Up{% endblock %}
+{% block mainheading%}Create New Account{% endblock %}
+{% block maintext %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Are You satisfied from our hard work and want to create account?</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to help us in creating new Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to become in touch with us? <span>Great, let's do it together.</span></p>
+{% endblock %}
+{% block content%}
+<div class="form-control" style="background-color: #FFF4A4;">
+        <div class="myform">
+            <h3 class="myh3 text-center">Sign-Up</h3>
+            {{ render_form(form)}}
+        </div>
+</div>
+{% endblock %}

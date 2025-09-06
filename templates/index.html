@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{%block title %}Home{% endblock %}
+{% block mainheading %}Stay <span>Connected</span><br>Stay <span>Happy.</span>{% endblock %}
+{% block maintext %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Are You our Fan but away from Us?</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any question,
+    feelings, segguestion about our Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to come in contact
+    with us? <span>Well it's Easy</span></p>
+<a type='button' class="mybtn ms-5" href="{{url_for('login')}}">Login</a>
+<a type="button" class="mybtn mb-5" href="{{url_for('sign_up')}}">Sign Up</a>
+{% endblock %}
+{% block content %}
+<section id="forFan" style="background-color: #386641;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="content py-5">
+                    <h3 class="myh3 py-3">What will we do for our Fans?</h3>
+                    <p class="myp fs-5 me-5">The best way to understand people is to come in contact with people. We do
+                        the same thing.
+                        We gave the user to create their account on our website and let them send us message. We create
+                        a question bank and
+                        give them answer in a very short period of time. Every client on our website is satisfied from
+                        our hardwork and fast reply and love us alot.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="p-5 ms-5 h-100 w-100 img-fluid" src="../static/assets/forfan.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section id="FanAsk" style="background-color: #386641;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="p-5 ms-5 h-100 w-100 img-fluid" src="../static/assets/forfan.jpg" alt="">
+            </div>
+            <div class="col-md-6">
+                <div class="content py-5">
+                    <h3 class="myh3 py-3">What Fan Ask With Us?</h3>
+                    <p class="myp fs-5 me-5">Fan can ask question on Different topics not just on Blogs But get some
+                        personal questions, seqquestions, Their feelings, chearing us also like following:</p>
+                    <ul>
+                        <li>What's our daily routine?</li>
+                        <li>What's our main profession?</li>
+                        <li>What will be the next blog we are going to write?</li>
+                        <li>You should write a blog about this topic.</li>
+                        <li>Your last blog was awnsome i like it!</li>
+                        <li>From where we collect data for our blogs?</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="pricing" style="background-color: #386641;">
+    <h3 class="myh3 ps-5 pt-5 pb-3">What are The Limits?</h3>
+    <p class="myp ps-5">We know you will not be happy to read this. But their are limitations on our websites. <br>To
+        provide you real experience, we need some budget.
+        We can't provide a carefull answere to millions of our fans. <br>There is a small amount if you want to become
+        our pro fan.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="containertext ps-3 mb-5" style="border: 3px solid #F97A00;">
+                    <h4 class="text-center py-3" style="color: #F97A00;">Classic</h4>
+                    <p class="myp text-center">Start your chat with no cost.</p>
+                    <h5 style="color: #FED16A; padding-left: 10px; font-size: 35px;">0$/Year</h5>
+                    <ul>
+                        <li>10 Messages/Month</li>
+                        <li>Slow Reply (4 to 5 days)</li>
+                        <li>Skip the unrelated Questions</li>
+                        <li>Active for 1 Year</li>
+                    </ul>
+                    <Button class="mybtn ms-4 my-4">Free</Button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="containertext ps-3 mb-5" style="border: 3px solid #F97A00;">
+                    <h4 class="text-center py-3" style="color: #F97A00;">Premium</h4>
+                    <p class="myp text-center">Be our pro fan with premium features.</p>
+                    <h5 style="color: #FED16A; padding-left: 10px; font-size: 35px;">49$/Year</h5>
+                    <ul>
+                        <li>30 Messages/Month</li>
+                        <li>Slow Reply (within 2 days)</li>
+                        <li>Get answer for professional questions.</li>
+                        <li>Active for 3 Years</li>
+                    </ul>
+                    <Button class="mybtn ms-4 my-4">Buy Premium</Button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="containertext ps-3 mb-5" style="border: 3px solid #F97A00;">
+                    <h4 class="text-center py-3" style="color: #F97A00;">Legendry</h4>
+                    <p class="myp text-center">Become Just like our family member.</p>
+                    <h5 style="color: #FED16A; padding-left: 10px; font-size: 35px;">99$/Year</h5>
+                    <ul>
+                        <li>Unlimited Messages</li>
+                        <li>Slow Reply (Just in a day)</li>
+                        <li>Get answer for any Question</li>
+                        <li>Get lifetime Account Activity.</li>
+                    </ul>
+                    <Button class="mybtn ms-4 my-4">Buy Legendry</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="security">
+    
+</section>
+{% endblock %}

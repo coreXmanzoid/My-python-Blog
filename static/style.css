@@ -1,0 +1,110 @@
+/* colors
+#386641
+#F97A00
+#FED16A
+#FFF4A4
+*/
+@import url('https://fonts.googleapis.com/css2?family=Ovo&display=swap');
+
+.navbar {
+    background-color: #386641 !important;
+    font-family: "Ovo", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.mybtn {
+    font-size: 20px;
+    color: #FED16A;
+    background-color: #F97A00;
+    border: 1.5px solid #F97A00;
+    padding: 8px 20px;
+    transition: .8s;
+    text-decoration: None;
+}
+
+.mybtn:hover {
+    color: #386641;
+    background-color: #FFF4A4;
+    border: 2px solid #F97A00;
+}
+
+.mainpage {
+    background-image: url('./assets/background.jpg');
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.myh1 {
+    font-family: "Ovo", serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #F97A00;
+    font-size: 60px;
+
+    span {
+        color: #386641;
+    }
+}
+
+.myp {
+    color: #FFF4A4;
+    font-family: "Ovo", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+
+    span {
+        color: #386641;
+    }
+}
+
+.myh3 {
+    font-family: "Ovo", serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #F97A00;
+    font-size: 40px;
+}
+
+li {
+    color: #FFF4A4;
+    font-size: 20px;
+}
+
+.myform {
+    background-color: #386641;
+    margin-top: 100px;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2% 8%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    label {
+        color: #FED16A;
+        font-size: 20px;
+    }
+
+    input {
+        background-color: #F97A00;
+    }
+
+    #submit{
+        font-size: 23px;
+        color: #FED16A;
+        background-color: #F97A00;
+        border: 1.5px solid #F97A00;
+        padding: 7px 15px;
+        transition: .8s;
+        text-decoration: None;
+
+
+    }
+
+    #submit:hover {
+        color: #386641;
+        background-color: #FFF4A4;
+        border: 2px solid #F97A00;
+    }
+}

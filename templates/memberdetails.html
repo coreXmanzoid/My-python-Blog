@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{detail[1]}}{% endblock %}
+{% block mainheading %}{{ detail[1] }}{% endblock %}
+{% block maintext%}
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1 my-5 me-2"></i>{{ detail[2] }}</p>
+{% endblock %}
+{% block content%}
+<section id="details" style="background-color: #386641;">
+    <h3 class="myh3 ps-5 py-5">About {{ detail[1] }}:</h3>
+    <p class="myp ps-5 pb-5">{{detail[0]}}</p>
+    <p class="myp ps-5 pb-5">Let's go back to <a href="{{url_for('about')}}">About Section</a></p>
+</section>
+{% endblock %}

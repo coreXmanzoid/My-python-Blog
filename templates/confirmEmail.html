@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Confirm-Email{% endblock %}
+
+
+{% block mainheading%}
+{% if Emailconfirm == 1: %}
+Account Created Successfully.
+{% elif Emailconfirm == 2: %}
+<span> Oops.</span> There is some problem.
+{% else: %}
+Comfirm Your Email.
+{% endif %}
+{% endblock %}
+
+{% block maintext %}
+{% if Emailconfirm == 1: %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Thanks For Creating account. We
+    appreciate your patience and appologize for inconvenience.</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i> Please wait for at least 2 days until we
+    Verify your Account. </p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>When your account is ready to use
+    <span>we will inform you through an Email.</span></p>
+{% elif Emailconfirm == 2: %}
+<p class="myp pb-5 ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>You might have entered a wrong email or
+    OTP code. Please <a href="{{ url_for('sign_up')}}">try again</p>
+{% else: %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Are You our Fan but away from Us?</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any question,
+    feelings, segguestion about our Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to come in contact
+    with us? <span>Well it's Easy</span></p>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<center>
+    <div class="form-control" style="background-color: #FFF4A4;">
+        <div class="myform">
+            {% if Emailconfirm == 1: %}
+            <h3 class="myh3 pb-5">Email Confirmed Successfully</h3>
+            <p class="myp">Thanks For Creating account. We appreciate your patience and appologize for inconvenience.
+                <br> Please wait
+                for at least 2 days. When your account is ready to use we will inform you through an Email.</p>
+            {% elif Emailconfirm == 2: %}
+            <h3 class="myh3">Oops. There is some problem.</h3>
+            <p class="myp ">You might have entered a wrong email or OTP code. Please <a
+                    href="{{ url_for('sign_up')}}">try again</a>.
+            </p>
+            {% else: %}
+            <h3 class="myh3 text-center">Confirm Email</h3>
+            <p class="myp">We have sent a 6-digit OTP to your Email: {{email}} <br>Please enter below for confirmation.
+                So we can
+                all stay safe from any theft. Thanks</p>
+            {{ render_form(form)}}
+        </div>
+    </div>
+
+
+    {% endif %}
+</center>
+{% endblock %}

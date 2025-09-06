@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Login{% endblock %}
+{% block mainheading%}Welcome <span>Back</span>.{% endblock %}
+{% block maintext %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>We are glad to see you back.</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any question about our Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to give us segguestion about our next blog? <span>Yes, we hear everyone.</span></p>
+{% endblock %}
+{% block content%}
+<div class="form-control" style="background-color: #FFF4A4;">
+        <div class="myform">
+            <h3 class="myh3 text-center">Login</h3>
+            {% with messages = get_flashed_messages() %}
+            <ul>
+                {% for message in messages %}
+                <p class="py-1 text-danger fw-Bold fs-4 text-center">{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endwith %}
+            {{ render_form(form)}}
+        </div>
+</div>
+{% endblock %}
