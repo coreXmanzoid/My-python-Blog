@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
@@ -9,9 +9,9 @@ from wtforms import StringField, SubmitField, validators, IntegerField, Password
 from wtforms.validators import DataRequired
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 import requests, second
-
-
-
+from functools import wraps
+from sqlalchemy.orm import relationship
+from datetime import datetime
 # getting team members detail.
 url = 'https://api.npoint.io/661ce7396adc94112757'
 Name, Email, Age, Password, Number = None, None, None, None, None
@@ -51,6 +51,7 @@ email = second.EmailHandling()
 
 
 class UserDB(UserMixin, db.Model):
+    __tablename__ = 'User'
     id: Mapped[int] = mapped_column(Integer, unique=True, primary_key=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
     age: Mapped[int] = mapped_column(Integer, nullable=False)
@@ -58,6 +59,17 @@ class UserDB(UserMixin, db.Model):
     number: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String, nullable=False)
     status: Mapped[str] = mapped_column(String, nullable=True)
+    
+    questions = relationship("UserComment", back_populates="user")
+
+class  UserComment(db.Model):
+    __tablename__ = 'Questions'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    text: Mapped[str] = mapped_column(String, nullable=False)
+    date: Mapped[str] = mapped_column(String, nullable=False)
+    user_id: Mapped[int] = mapped_column(Integer, db.ForeignKey('User.id'))
+    
+    user = relationship("UserDB", back_populates='questions')
     
 with app.app_context():
     db.create_all()
@@ -140,7 +152,7 @@ def login():
             flash('Please Enter a correct Password')
             return redirect(url_for('login'))
         login_user(user_data)
-        return redirect(url_for('user_page', name=current_user.name))
+        return redirect(url_for('front_page', name=current_user.name))
     return render_template('login.html', form=form)
    
 @app.route('/<string:name>/User-Page', methods=['GET', 'POST'])
@@ -148,7 +160,21 @@ def login():
 def user_page(name):
     form = SendMail()
     if form.validate_on_submit():
-        email.send_contact_email(user_email=current_user.email, user_message=form.message.data)
+        new_commment = UserComment(
+            text = form.message.data,
+            date = datetime.now(),
+            user_id = current_user.id
+        )
+        db.session.add(new_commment)
+        db.session.commit()
+        return redirect(url_for('front_page', name=current_user.name))
     return render_template('loggedin.html', name=name, form=form, account_status=str(current_user.status))
+
+@app.route('/<string:name>/front-Page', methods=['GET', 'POST'])
+@login_required
+def front_page(name):
+    with app.app_context():
+        comments = db.session.execute(db.select(UserComment).where(UserComment.user_id == current_user.id)).scalars().all()
+        return render_template('loggingin.html', name = name, comments = comments)
 if __name__ == '__main__':
     app.run(debug=True)

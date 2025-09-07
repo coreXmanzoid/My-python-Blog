@@ -108,3 +108,17 @@ li {
         border: 2px solid #F97A00;
     }
 }
+.mycomment{
+    margin: 5% 20%;
+    background-color: #386641;
+    padding: 1% 10%;
+    text-decoration: none;
+    img{
+        border-radius: 50%;
+        width: 50px;
+    }
+    small{
+        color: #FED16A;
+    }
+
+}
