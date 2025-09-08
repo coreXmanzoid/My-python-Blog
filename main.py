@@ -154,7 +154,11 @@ def login():
         login_user(user_data)
         return redirect(url_for('front_page', name=current_user.name))
     return render_template('login.html', form=form)
-   
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))   
 @app.route('/<string:name>/User-Page', methods=['GET', 'POST'])
 @login_required
 def user_page(name):
@@ -175,6 +179,6 @@ def user_page(name):
 def front_page(name):
     with app.app_context():
         comments = db.session.execute(db.select(UserComment).where(UserComment.user_id == current_user.id)).scalars().all()
-        return render_template('loggingin.html', name = name, comments = comments)
+        return render_template('loggingin.html', name = name, comments = reversed(comments))
 if __name__ == '__main__':
     app.run(debug=True)

@@ -88,21 +88,22 @@ li {
 
     input {
         background-color: #F97A00;
+        height: 45px;
+        border-radius: 0%;
     }
-
-    #submit{
+    input[type=submit]{
         font-size: 23px;
         color: #FED16A;
         background-color: #F97A00;
         border: 1.5px solid #F97A00;
-        padding: 7px 15px;
+        padding: 7px 15px !important;
         transition: .8s;
         text-decoration: None;
-
-
+        border-radius: 0px;
+        height: 55px;
     }
 
-    #submit:hover {
+    input[type=submit]:hover {
         color: #386641;
         background-color: #FFF4A4;
         border: 2px solid #F97A00;
