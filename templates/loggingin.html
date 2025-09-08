@@ -37,7 +37,11 @@
             <hr style="color: #F97A00; border: 2px solid #F97A00;">
            {% endfor %}
           </ul>
-          <a href="">See older Questions</a>
+          {% if comments|length == 3: %}
+          <a class='mya ps-4' href="{{ url_for('front_page', name='show older messages')}}">See older Questions</a>
+          {% else: %}
+          <a class='mya ps-4' href="{{ url_for('front_page', name=current_user.name)}}">See latest Questions</a>
+          {% endif %}
         </div>
 
 {% endblock %}

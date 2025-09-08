@@ -179,6 +179,8 @@ def user_page(name):
 def front_page(name):
     with app.app_context():
         comments = db.session.execute(db.select(UserComment).where(UserComment.user_id == current_user.id)).scalars().all()
-        return render_template('loggingin.html', name = name, comments = reversed(comments))
+        if name == 'show older messages':
+            return render_template('loggingin.html', name = current_user.name , comments =comments[::-1][3:])
+        return render_template('loggingin.html', name = name, comments =comments[::-1][:3])
 if __name__ == '__main__':
     app.run(debug=True)
