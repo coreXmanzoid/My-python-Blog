@@ -127,3 +127,27 @@ li {
     color: #F97A00;
     font-size: 19px;
 }
+.mycontainer{
+    margin: 0% 20%;
+    background-color: #386641;
+    padding: 1% 10%;
+    text-decoration: none;
+    img{
+        border-radius: 50%;
+        width: 50px;
+    }
+    select{
+        background-color: #F97A00;
+        color: #FED16A;
+    }
+}
+.Thiscontainer {
+    background-color: #F97A00;
+    p{
+        font-size: 22px;
+        text-align: center;
+        font-weight: 600;
+        color: #386641;
+        font-size: 22px;
+    }
+}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
@@ -10,8 +10,18 @@ from wtforms.validators import DataRequired
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 import requests, second
 from functools import wraps
+
 from sqlalchemy.orm import relationship
 from datetime import datetime
+
+def only_admin(fun):
+    @wraps(fun)
+    def wrapper(*args, **kwargs):
+        if current_user.id != 1:
+            return abort(403)
+        return fun(*args, **kwargs)
+    return wrapper
+
 # getting team members detail.
 url = 'https://api.npoint.io/661ce7396adc94112757'
 Name, Email, Age, Password, Number = None, None, None, None, None
@@ -182,5 +192,36 @@ def front_page(name):
         if name == 'show older messages':
             return render_template('loggingin.html', name = current_user.name , comments =comments[::-1][3:])
         return render_template('loggingin.html', name = name, comments =comments[::-1][:3])
+
+@app.route('/verification/<string:status>', methods=['GET', 'POST'])    
+@login_required
+@only_admin
+def verify(status):
+    with app.app_context():
+        if status == "Pending":
+            user_data = db.session.execute(db.select(UserDB).where(UserDB.status == 'Pending')).scalars().all()
+            if len(user_data) == 0:
+                return '<h1>No Pending Verification.</h1><p>Have a rest.</p>'
+            if request.method == 'POST':
+                updated_account_status = request.form.getlist('status')
+                for i in range(len(user_data)):
+                    user_data[i].status = updated_account_status[i]
+                    print(updated_account_status[i])
+                db.session.commit()
+                return redirect(url_for('verify', status='Pending'))
+        elif status == "Active":
+            user_data = db.session.execute(db.select(UserDB).where(UserDB.status == 'Active')).scalars().all()
+            if len(user_data) == 0:
+                return '<h1>There is no verified account.</h1><p>Go to <a>/verification/Pending</a> to start verification.</p>'
+            if request.method == 'POST':
+                updated_account_status = request.form.getlist('status')
+                for i in range(len(user_data)):
+                    user_data[i].status = updated_account_status[i]
+                db.session.commit()
+                return redirect(url_for('verify', status='Pending'))
+        else: 
+            user_data = None
+        return render_template('verification.html', users= user_data)
+    
 if __name__ == '__main__':
     app.run(debug=True)

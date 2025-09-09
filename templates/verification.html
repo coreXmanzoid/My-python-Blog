@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}CoreXManzoid{% endblock %}
+{% block mainheading%}Verification <span>Page</span>{% endblock %}
+{% block maintext %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Hello admin.</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Let's time for work. We have to verify a
+    lot of pending accounts.</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>See account carefully before doing
+    anything.<span>Let's do it.</span></p>
+<a type="button" class="mybtn ms-5" href="{{url_for('verify', status='Pending')}}">Pending For Verification</a>
+<a type='button' class="mybtn mb-5" href="{{url_for('verify', status='Active')}}">Verified Accounts</a>
+{% endblock %}
+{% block content%}
+<div class="mt-5 mx-5 px-5 container Thiscontainer">
+    <div class="row">
+        <div class="col-md-3 pt-3">
+            <p>User Name</p>
+        </div>
+        <div class="col-md-3 pt-3">
+            <p>Email</p>
+        </div>
+        <div class="col-md-3 pt-3">
+            <p>Age | Phone Number</p>
+        </div>
+        <div class="col-md-3 pt-3 ">
+            <p>Account Status</p>
+        </div>
+    </div>
+</div>
+<form action="/verification/{{users[0].status}}" method="post">
+    <div class="mx-5 px-5 container mycontainer">
+    {% for user in users%}
+    <div class="row">
+        <div class="col-md-3 myp pt-3">
+            <img class="me-3 pt-0 myimg" src="../static/assets/default-profile.jpg" alt="Profile picture">{{ user.name }}
+        </div>
+        <div class="col-md-3 pt-3 myp">
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="col-md-3 pt-3 myp">
+            <p>{{ user.age }} | {{ user.number }}</p>
+        </div>
+        <div class="col-md-3 pt-3">
+            <div class="mb-3 ps-5">
+                <select id="status-select" name="status" class="form-select w-auto">
+                    <option value="Pending">Pending</option>
+                    <option value="Active">Verified</option>
+                    <option value="Non Verified">Non Verified</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <button type="submit" class="ms-3 my-5 mybtn">Submit Changes</button>
+</div>
+</form>
+{% endblock %}
