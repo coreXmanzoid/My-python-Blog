@@ -2,16 +2,14 @@ from flask import Flask, render_template, redirect, url_for, flash, abort, reque
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Float
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import Integer, String
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators, IntegerField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 import requests, second
 from functools import wraps
-
-from sqlalchemy.orm import relationship
 from datetime import datetime
 
 def only_admin(fun):
@@ -32,7 +30,7 @@ class signUp(FlaskForm):
     email = StringField(label='Email', validators=[DataRequired(), validators.Email()])
     number = IntegerField(label='Phone Number', validators=[DataRequired()])
     password = PasswordField(label='Password', validators=[DataRequired(), validators.Length(min=8, message='Password should be at least 8 characters long')])
-    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), validators.EqualTo('password', 'Possword miss match' )])
+    confirm_password = PasswordField(label='Confirm Password', validators=[DataRequired(), validators.EqualTo('password', 'Password miss match' )])
     submit = SubmitField(label='Sign Up')
     
 class ConfirmEmail(FlaskForm):
@@ -78,7 +76,7 @@ class  UserComment(db.Model):
     text: Mapped[str] = mapped_column(String, nullable=False)
     date: Mapped[str] = mapped_column(String, nullable=False)
     user_id: Mapped[int] = mapped_column(Integer, db.ForeignKey('User.id'))
-    
+    answer: Mapped[str] = mapped_column(String, nullable=True)
     user = relationship("UserDB", back_populates='questions')
     
 with app.app_context():
@@ -177,7 +175,8 @@ def user_page(name):
         new_commment = UserComment(
             text = form.message.data,
             date = datetime.now(),
-            user_id = current_user.id
+            user_id = current_user.id,
+            answer = 'Answer Unavailable',
         )
         db.session.add(new_commment)
         db.session.commit()
@@ -223,5 +222,21 @@ def verify(status):
             user_data = None
         return render_template('verification.html', users= user_data)
     
+@app.route('/Answer/<int:id>', methods=['GET', 'POST'])
+@login_required
+@only_admin
+def answer(id):
+    with app.app_context():
+        comments = db.session.execute(db.select(UserComment).where(UserComment.answer == 'Answer Unavailable')).scalars().all()
+        if request.method == 'POST':
+            comment = db.session.execute(db.select(UserComment).where(UserComment.id == id)).scalar()
+            admin_answer = str(request.form.get('answer'))
+            if len(admin_answer) != 0:
+                comment.answer = request.form.get('answer')
+            else:
+                comment.answer = 'Answer Unavailable'
+            db.session.commit()
+            return redirect(url_for('answer', id=1))
+        return render_template('answer.html', comments=comments)
 if __name__ == '__main__':
     app.run(debug=True)

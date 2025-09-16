@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}CoreXManzoid{% endblock %}
+{% block mainheading%}Hi <span>{{ current_user.name }}</span>,{% endblock %}
+{% block styles %}
+{{ super() }}
+<style>
+    .myform textarea {
+        height: 180px;
+        background-color: #F97A00;
+    }
+</style>
+{% endblock %}
+
+{% block maintext %}
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Are You our Fan but away from Us?</p>
+<p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any question,
+    feelings, segguestion about our Blogs?</p>
+<p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to come in contact
+    with us? <span>Well it's Easy</span></p>
+{% endblock %}
+{% block content %}
+<div class="comment mycomment myform">
+    <!-- TODO: Show all the comments on a post -->
+    <ul class="commentList">
+        {% for comment in comments %}
+        <form action="/Answer/{{comment.id}}" method="post">
+            <li>
+                <div class="commenterImage pt-3">
+                    <img src="../static/assets/default-profile.jpg" />
+                    <small>{{comment.user.name }}</small>
+
+                </div>
+                <div class="commentText">
+                    <p class="myp pt-3">Q: {{ comment.text }} </p>
+                    <input class="w-100" type="text" name='answer' placeholder="{{comment.answer}}">
+                    <a href="{{ url_for('answer', id=comment.id) }}"><input type="submit" class="mybtn fs-6 py-2"></a>
+                    <span class="date sub-text fs-6 text-dark"> | Posted on {{ comment.date }} </span>
+                </div>
+            </li>
+            <hr style="color: #F97A00; border: 2px solid #F97A00;">
+        </form>
+        {% endfor %}
+    </ul>
+
+    {% endblock %}
+
+    {% block javascripts %}
+    {{ super() }}
+    <script>
+        function showReply() {
+            let answer = "";
+            if (answer.trim() != "") {
+                document.getElementById("answer").innerText = answer;
+            } else {
+                document.getElementsById('answer').innerText = "No Reply Yet. Please Wat."
+            }
+        }
+    </script>
+    {% endblock %}
