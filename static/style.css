@@ -1,26 +1,39 @@
-/* colors
-#386641
-#F97A00
-#FED16A
-#FFF4A4
+/* Color Palette
+#386641 - Dark Green
+#F97A00 - Orange
+#FED16A - Yellow
+#FFF4A4 - Light Yellow
 */
+
 @import url('https://fonts.googleapis.com/css2?family=Ovo&display=swap');
 
+body {
+    font-family: "Ovo", serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    color: #FFF4A4; /* default text color */
+}
+
+/* Navbar */
 .navbar {
     background-color: #386641 !important;
-    font-family: "Ovo", serif;
     font-weight: 500;
     font-style: normal;
 }
 
+/* Buttons */
 .mybtn {
     font-size: 20px;
     color: #FED16A;
     background-color: #F97A00;
     border: 1.5px solid #F97A00;
     padding: 8px 20px;
-    transition: .8s;
-    text-decoration: None;
+    transition: 0.8s;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 0;
 }
 
 .mybtn:hover {
@@ -29,126 +42,261 @@
     border: 2px solid #F97A00;
 }
 
+/* Main Page Background */
 .mainpage {
     background-image: url('./assets/background.jpg');
-    background-size:cover;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    height: 100vh;
 }
 
+/* Headings */
 .myh1 {
-    font-family: "Ovo", serif;
     font-weight: 500;
     font-style: normal;
     color: #F97A00;
     font-size: 60px;
-
-    span {
-        color: #386641;
-    }
 }
 
-.myp {
-    color: #FFF4A4;
-    font-family: "Ovo", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 22px;
-
-    span {
-        color: #386641;
-    }
+.myh1 span {
+    color: #386641;
 }
 
 .myh3 {
-    font-family: "Ovo", serif;
     font-weight: 500;
     font-style: normal;
     color: #F97A00;
     font-size: 40px;
+    margin-bottom: 1rem;
 }
 
+/* Paragraph text */
+.myp {
+    color: #FFF4A4;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+    margin-bottom: 1rem;
+}
+
+.myp span {
+    color: #386641;
+}
+
+/* Lists */
 li {
     color: #FFF4A4;
     font-size: 20px;
+    list-style-type: none;
+    margin-bottom: 1rem;
 }
 
+/* Forms */
 .myform {
     background-color: #386641;
-    margin-top: 100px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 100px auto 0;
     padding: 2% 8%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-    label {
-        color: #FED16A;
-        font-size: 20px;
-    }
-
-    input {
-        background-color: #F97A00;
-        height: 45px;
-        border-radius: 0%;
-    }
-    input[type=submit]{
-        font-size: 23px;
-        color: #FED16A;
-        background-color: #F97A00;
-        border: 1.5px solid #F97A00;
-        padding: 7px 15px !important;
-        transition: .8s;
-        text-decoration: None;
-        border-radius: 0px;
-        height: 55px;
-    }
-
-    input[type=submit]:hover {
-        color: #386641;
-        background-color: #FFF4A4;
-        border: 2px solid #F97A00;
-    }
+    max-width: 60%;
+    border-radius: 5px;
 }
-.mycomment{
-    margin: 5% 20%;
+
+.myform label {
+    color: #FED16A;
+    font-size: 20px;
+}
+
+.myform input,
+.myform textarea,
+.myform select {
+    background-color: #F97A00;
+    border: none;
+    border-radius: 0;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+
+.myform textarea {
+    height: 180px;
+    resize: vertical;
+}
+
+.myform input[type="submit"] {
+    font-size: 23px;
+    color: #FED16A;
+    background-color: #F97A00;
+    border: 1.5px solid #F97A00;
+    padding: 7px 15px !important;
+    transition: 0.8s;
+    cursor: pointer;
+    border-radius: 0;
+    height: 55px;
+}
+
+.myform input[type="submit"]:hover {
+    color: #386641;
+    background-color: #FFF4A4;
+    border: 2px solid #F97A00;
+}
+
+/* Comment Section */
+.mycomment {
+    margin: 5% auto;
     background-color: #386641;
     padding: 1% 10%;
-    text-decoration: none;
-    img{
-        border-radius: 50%;
-        width: 50px;
-    }
-    small{
-        color: #FED16A;
-    }
-
+    max-width: 60%;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
-.mya{
+
+.mycomment img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.mycomment small {
+    color: #FED16A;
+    font-weight: 600;
+}
+
+/* Comment text */
+.commentText p {
+    margin: 0.5rem 0;
+    font-size: 20px;
+}
+
+.commentText a {
     color: #F97A00;
-    cursor:auto;
-    font-size: 19px;
+    cursor: pointer;
+    text-decoration: underline;
 }
-.mycontainer{
-    margin: 0% 20%;
+
+.commentText .date {
+    font-size: 14px;
+    color: #FFF4A4;
+    opacity: 0.8;
+}
+
+/* Older Questions / Links */
+.mya {
+    color: #F97A00;
+    cursor: pointer;
+    font-size: 19px;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Container for team section and other content */
+.mycontainer {
+    margin: 0 auto;
     background-color: #386641;
     padding: 1% 10%;
-    text-decoration: none;
-    img{
-        border-radius: 50%;
-        width: 50px;
-    }
-    select{
-        background-color: #F97A00;
-        color: #FED16A;
-    }
+    max-width: 60%;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
+
+.mycontainer img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.mycontainer select {
+    background-color: #F97A00;
+    color: #FED16A;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 0;
+}
+
+/* Simple container with text in yellow background */
 .Thiscontainer {
     background-color: #F97A00;
-    p{
-        font-size: 22px;
-        text-align: center;
-        font-weight: 600;
-        color: #386641;
-        font-size: 22px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 2rem 0;
+}
+
+.Thiscontainer p {
+    font-size: 22px;
+    text-align: center;
+    font-weight: 600;
+    color: #386641;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .myform,
+    .mycomment,
+    .mycontainer {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
     }
+    .myh1 {
+        font-size: 42px;
+    }
+    .myh3 {
+        font-size: 30px;
+    }
+    .myp {
+        font-size: 18px;
+    }
+    .mybtn {
+        font-size: 18px;
+        padding: 7px 18px;
+    }
+}
+
+/* Fix for anchors inside forms (avoid wrapping input in <a>) */
+form input[type="submit"] {
+    cursor: pointer;
+}
+
+/* Utility */
+.text-center {
+    text-align: center;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.ps-5 {
+    padding-left: 3rem !important;
+}
+
+.pb-5 {
+    padding-bottom: 3rem !important;
+}
+
+.pt-3 {
+    padding-top: 1rem !important;
+}
+
+.mb-5 {
+    margin-bottom: 3rem !important;
+}
+
+.ms-5 {
+    margin-left: 3rem !important;
+}
+
+.me-3 {
+    margin-right: 1rem !important;
 }

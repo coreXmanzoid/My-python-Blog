@@ -120,6 +120,10 @@ def sign_up():
         Email=form.email.data
         Number=form.number.data
         Password=form.password.data
+        user_exist = db.session.execute(db.select(UserDB).where(Email == UserDB.email)).scalar()
+        if user_exist:
+            flash('Email already registered. Please login instead.')
+            return redirect(url_for('login'))
         email.send_email(userEmail=Email)
         return redirect(url_for('confirm_email'))   
     return render_template('signUp.html', form=form)
@@ -240,3 +244,4 @@ def answer(id):
         return render_template('answer.html', comments=comments)
 if __name__ == '__main__':
     app.run(debug=True)
+
