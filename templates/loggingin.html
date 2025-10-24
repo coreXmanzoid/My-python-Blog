@@ -5,59 +5,64 @@
 {% block styles %}
 {{ super() }}
 <style>
-    .myform  textarea{
-        height: 180px;
-        background-color:  #F97A00;
-    }
+  .myform textarea {
+    height: 180px;
+    background-color: #F97A00;
+  }
 </style>
 {% endblock %}
 {% block maintext %}
 <p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Are You our Fan but away from Us?</p>
 <p class="myp ps-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you have any question,
-    feelings, segguestion about our Blogs?</p>
+  feelings, segguestion about our Blogs?</p>
 <p class="myp ps-5 pb-5"><i class="fa-solid fa-arrow-up-right-from-square pe-1"></i>Do you want to come in contact
-    with us? <span>Well it's Easy</span></p>
+  with us? <span>Well it's Easy</span></p>
 <a type="button" class="mybtn mb-5 ms-5 ps-5" href="{{url_for('user_page', name=name)}}">Enter new Question</a>
 {% endblock %}
 {% block content %}
 <div class="comment mycomment">
-          <!-- TODO: Show all the comments on a post -->
-          <ul class="commentList">
-           {% for comment in comments %}
-            <li>
-              <div class="commenterImage pt-3">
-                <img src="../static/assets/default-profile.jpg" />
-                <small>{{comment.user.name }}</small>
-              </div>
-              <div class="commentText">
-                <p class="myp pt-3">Q: {{ comment.text }} </p>
-                <a href="#" onclick="showReply()">See reply</a>
-                <p id="answer"></p>
-                <span class="date sub-text fs-6 text-dark">    |    Posted on {{ comment.date }} </span>
-              </div>
-            </li>
-            <hr style="color: #F97A00; border: 2px solid #F97A00;">
-           {% endfor %}
-          </ul>
-          {% if comments|length == 3: %}
-          <a class='mya ps-4' href="{{ url_for('front_page', name='show older messages')}}">See older Questions</a>
-          {% else: %}
-          <a class='mya ps-4' href="{{ url_for('front_page', name=current_user.name)}}">See latest Questions</a>
-          {% endif %}
-        </div>
+  <!-- TODO: Show all the comments on a post -->
+  <ul class="commentList">
+    {% for comment in comments %}
+    <li>
+      <div class="commenterImage pt-3">
+        <img src="../static/assets/default-profile.jpg" />
+        <small>{{comment.user.name }}</small>
+      </div>
+      <div class="commentText">
+        <p class="myp pt-3">Q: {{ comment.text }} </p>
+        <p class="answer" style="display: none; color: grey">Ans: {{ comment.answer }}</p>
+        <a href="#">See reply</a>
+        <span class="date sub-text fs-6 text-dark"> | Posted on {{ comment.date }} </span>
+      </div>
+    </li>
+    <hr style="color: #F97A00; border: 2px solid #F97A00;">
+    {% endfor %}
+  </ul>
+  {% if comments|length == 3: %}
+  <a class='mya ps-4' href="{{ url_for('front_page', name='show older messages')}}">See older Questions</a>
+  {% else: %}
+  <a class='mya ps-4' href="{{ url_for('front_page', name=current_user.name)}}">See latest Questions</a>
+  {% endif %}
+</div>
 
 {% endblock %}
 
 {% block javascripts %}
 {{ super() }}
 <script>
-  function showReply(){
-    let answer = 'hi';
-    if (answer.trim() != "Answer Unavailable"){
-      document.getElementById("answer").textContent = answer;
-    } else {
-      document.getElementsById('answer').textContent = "No Reply Yet. Please Wat."
-    }
-  }
+  var buttons = document.querySelectorAll(".commentText a");
+  var answer = document.querySelectorAll(".answer");
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", function(){
+      if (this.textContent === "See reply"){
+        answer[index].style.display = "block";
+        this.textContent = "Hide reply";
+      } else if (this.textContent === "Hide reply"){
+        answer[index].style.display = "none";
+        this.textContent = "See reply";
+      }
+    });
+  });
 </script>
-{% endblock   %}
+{% endblock %}

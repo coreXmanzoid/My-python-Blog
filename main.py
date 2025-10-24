@@ -12,6 +12,7 @@ import requests, second
 from functools import wraps
 from datetime import datetime
 
+
 def only_admin(fun):
     @wraps(fun)
     def wrapper(*args, **kwargs):
